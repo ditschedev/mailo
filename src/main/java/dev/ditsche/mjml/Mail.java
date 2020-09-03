@@ -32,6 +32,10 @@ public class Mail {
 
     @Getter
     @Setter
+    private MailAddress replyTo;
+
+    @Getter
+    @Setter
     private String mjml;
 
     public Mail(String subject) {

@@ -19,8 +19,8 @@ public class MailJetMailProvider extends AbstractMailProvider {
 
     private MailjetClient mailjetClient;
 
-    public MailJetMailProvider(String publicKey, String secretKey, String from) {
-        super(from);
+    public MailJetMailProvider(MJMLConfig config, String publicKey, String secretKey) {
+        super(config);
         this.mailjetClient = new MailjetClient(publicKey, secretKey, new ClientOptions("v3.1"));
     }
 
@@ -31,7 +31,7 @@ public class MailJetMailProvider extends AbstractMailProvider {
                 .property(Emailv31.MESSAGES, new JSONArray()
                         .put(new JSONObject()
                                 .put(Emailv31.Message.FROM, new JSONObject()
-                                        .put("Email", this.from))
+                                        .put("Email", this.config.getFrom()))
                                 .put(Emailv31.Message.TO, new JSONArray()
                                         .put(new JSONObject()
                                                 .put("Email", mail.getRecipient().getEmail())

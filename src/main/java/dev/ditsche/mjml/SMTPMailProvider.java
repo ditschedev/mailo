@@ -4,6 +4,7 @@ import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.io.IOException;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -11,19 +12,19 @@ import java.util.Properties;
  */
 public class SMTPMailProvider extends AbstractMailProvider {
 
-    private final SMTPConfig config;
+    private final SMTPConfig smtpConfig;
 
     private final Session session;
 
-    public SMTPMailProvider(SMTPConfig config, String from) {
-        super(from);
-        this.config = config;
+    public SMTPMailProvider(MJMLConfig config, SMTPConfig smtpConfig) {
+        super(config);
+        this.smtpConfig = smtpConfig;
         Properties props = new Properties();
-        props.put("mail.smtp.host", config.getHost()); //SMTP Host
-        props.put("mail.smtp.port", config.getPort()); //TLS Port
-        props.put("mail.smtp.auth", config.getUsername() != null); //enable authentication
-        if(config.isSsl()) {
-            props.put("mail.smtp.starttls.enable", config.isSsl()); //enable STARTTLS
+        props.put("mail.smtp.host", smtpConfig.getHost()); //SMTP Host
+        props.put("mail.smtp.port", smtpConfig.getPort()); //TLS Port
+        props.put("mail.smtp.auth", smtpConfig.getUsername() != null); //enable authentication
+        if(smtpConfig.isSsl()) {
+            props.put("mail.smtp.starttls.enable", smtpConfig.isSsl()); //enable STARTTLS
         } else {
             props.put("mail.smtp.socketFactory.port", "465"); //SSL Port
             props.put("mail.smtp.socketFactory.class",
@@ -34,7 +35,7 @@ public class SMTPMailProvider extends AbstractMailProvider {
         Authenticator auth = new Authenticator() {
             //override the getPasswordAuthentication method
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(config.getUsername(), config.getPassword());
+                return new PasswordAuthentication(smtpConfig.getUsername(), smtpConfig.getPassword());
             }
         };
         this.session = Session.getInstance(props, auth);
@@ -48,20 +49,12 @@ public class SMTPMailProvider extends AbstractMailProvider {
             message.addHeader("format", "flowed");
             message.addHeader("Content-Transfer-Encoding", "8bit");
 
-
-            // Set From: header field of the header.
-            message.setFrom(new InternetAddress(from));
-
-            // Set To: header field of the header.
+            message.setFrom(new InternetAddress(this.config.getFrom()));
+            if(mail.getReplyTo() != null)
+                message.setReplyTo(List.of(mail.getReplyTo().toAddress()).toArray(new Address[1]));
             message.addRecipient(Message.RecipientType.TO, mail.getRecipient().toAddress());
-
-            // Set Subject: header field
             message.setSubject(mail.getSubject(), "UTF-8");
-
-            // Now set the actual message
             message.setText(mjmlToHtml(mail.getMjml()), "UTF-8");
-
-            // Send message
             Transport.send(message);
             return true;
         } catch (MessagingException e) {
