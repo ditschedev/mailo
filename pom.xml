@@ -31,6 +31,40 @@
         <maven.compiler.source>11</maven.compiler.source>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.12</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mailjet</groupId>
+            <artifactId>mailjet-client</artifactId>
+            <version>4.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.spullara.mustache.java</groupId>
+            <artifactId>compiler</artifactId>
+            <version>0.9.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.konghq</groupId>
+            <artifactId>unirest-java</artifactId>
+            <version>3.7.02</version>
+            <classifier>standalone</classifier>
+        </dependency>
+        <dependency>
+            <groupId>com.konghq</groupId>
+            <artifactId>unirest-objectmapper-jackson</artifactId>
+            <version>3.7.02</version>
+        </dependency>
+    </dependencies>
+
     <distributionManagement>
         <snapshotRepository>
             <id>ossrh</id>
