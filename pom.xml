@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>dev.ditsche</groupId>
+    <artifactId>mjml-client</artifactId>
+    <version>1.0.0</version>
+
+    <packaging>jar</packaging>
+
+    <name>Java MJML Client</name>
+    <description>
+        This is a client for sending mjml emails from a Spring Boot REST API.
+        It makes use of Mustache for templating and is adaptable.
+    </description>
+    <url>https://github.com/ditschedev/validator</url>
+
+</project>
