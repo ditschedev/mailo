@@ -54,7 +54,7 @@ public class SMTPMailProvider extends AbstractMailProvider {
                 message.setReplyTo(List.of(mail.getReplyTo().toAddress()).toArray(new Address[1]));
             message.addRecipient(Message.RecipientType.TO, mail.getRecipient().toAddress());
             message.setSubject(mail.getSubject(), "UTF-8");
-            message.setText(mjmlToHtml(mail.getMjml()), "UTF-8");
+            message.setContent(mjmlToHtml(mail.getMjml()), "text/html");
             Transport.send(message);
             return true;
         } catch (MessagingException e) {
