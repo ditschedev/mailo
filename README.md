@@ -15,7 +15,12 @@ Add the dependency to your maven dependencies:
 </dependency>
 ```
 
-## Sending mails
+## Usage
+
+### Creating templates
+Place your mjml-mail templates at `resources/templates`
+
+### Sending mails
 To send a mail, adapt the following code snippet.
 
 ```java
@@ -26,8 +31,10 @@ config.setPort(465);
 config.setUsername("test@example.com");
 config.setPassword("test123!");
 
+MJMLConfig mjmlConfig = new MJMLConfig("appId", "appSecret", "from@example.com");
+
 // Init mail provider
-MailProvider mailProvider = new SMTPMailProvider(config, "test@example.com");
+MailProvider mailProvider = new SMTPMailProvider(mjmlConfig, config);
 
 // Build a mail
 Mail mail = MailBuilder.create("Email Subject")
