@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.StringWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 
 /**
@@ -29,6 +31,10 @@ public class Mail {
     private Set<MailAddress> cc;
 
     private Set<MailAddress> bcc;
+
+    @Getter
+    @Setter
+    private MailAddress replyTo;
 
     @Getter
     @Setter
@@ -100,6 +106,8 @@ public class Mail {
         if(!template.endsWith(".mjml")) template += ".mjml";
         if(properties == null) properties = new HashMap<>();
         MustacheFactory mf = new DefaultMustacheFactory();
+        if(!Files.exists(Path.of("templates", template)))
+            throw new TemplateNotFoundException();
         Mustache mustache = mf.compile("templates/" + template);
         StringWriter stringWriter = new StringWriter();
         mustache.execute(stringWriter, properties);
