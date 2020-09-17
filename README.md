@@ -11,7 +11,7 @@ Add the dependency to your maven dependencies:
 <dependency>
     <groupId>dev.ditsche</groupId>
     <artifactId>mjml-client</artifactId>
-    <version>1.2.2</version>
+    <version>1.2.3</version>
 </dependency>
 ```
 
