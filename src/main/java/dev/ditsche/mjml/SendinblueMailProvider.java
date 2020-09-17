@@ -28,7 +28,7 @@ public class SendinblueMailProvider extends AbstractMailProvider {
     }
 
     @Override
-    public boolean send(Mail mail) throws IOException {
+    public boolean send(Mail mail) {
         SendSmtpEmail email = new SendSmtpEmail();
         email.addToItem(new SendSmtpEmailTo().email(mail.getRecipient().getEmail()).name(mail.getRecipient().getName()));
         email.subject(mail.getSubject());

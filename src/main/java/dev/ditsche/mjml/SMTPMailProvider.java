@@ -4,6 +4,7 @@ import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Properties;
 
@@ -42,7 +43,7 @@ public class SMTPMailProvider extends AbstractMailProvider {
     }
 
     @Override
-    public boolean send(Mail mail) throws IOException {
+    public boolean send(Mail mail) {
         try {
             MimeMessage message = new MimeMessage(session);
             message.addHeader("Content-type", "text/HTML; charset=UTF-8");
@@ -57,7 +58,7 @@ public class SMTPMailProvider extends AbstractMailProvider {
             message.setContent(mjmlToHtml(mail.getMjml()), "text/html");
             Transport.send(message);
             return true;
-        } catch (MessagingException e) {
+        } catch (MessagingException | UnsupportedEncodingException e) {
             e.printStackTrace();
             return false;
         }

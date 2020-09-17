@@ -23,7 +23,7 @@ public class SendGridMailProvider extends AbstractMailProvider {
     }
 
     @Override
-    public boolean send(Mail mail) throws IOException {
+    public boolean send(Mail mail) {
         com.sendgrid.helpers.mail.Mail send = new com.sendgrid.helpers.mail.Mail(
                 new Email(this.config.getFrom()),
                 mail.getSubject(),
