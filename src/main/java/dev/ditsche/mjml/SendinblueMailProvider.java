@@ -34,9 +34,12 @@ public class SendinblueMailProvider extends AbstractMailProvider {
         email.subject(mail.getSubject());
         email.setSender(new SendSmtpEmailSender().email(config.getFrom()));
         email.setHtmlContent(mjmlToHtml(mail.getMjml()));
-        email.setCc(mail.getCC().stream().map(ma -> new SendSmtpEmailCc().email(ma.getEmail()).name(ma.getName())).collect(Collectors.toList()));
-        email.setBcc(mail.getBCC().stream().map(ma -> new SendSmtpEmailBcc().email(ma.getEmail()).name(ma.getName())).collect(Collectors.toList()));
-        email.setReplyTo(new SendSmtpEmailReplyTo().email(mail.getReplyTo().getEmail()).name(mail.getReplyTo().getName()));
+        if(mail.getCC() != null)
+            email.setCc(mail.getCC().stream().map(ma -> new SendSmtpEmailCc().email(ma.getEmail()).name(ma.getName())).collect(Collectors.toList()));
+        if(mail.getBCC() != null)
+            email.setBcc(mail.getBCC().stream().map(ma -> new SendSmtpEmailBcc().email(ma.getEmail()).name(ma.getName())).collect(Collectors.toList()));
+        if(mail.getReplyTo() != null)
+            email.setReplyTo(new SendSmtpEmailReplyTo().email(mail.getReplyTo().getEmail()).name(mail.getReplyTo().getName()));
 
         try {
             sendApi.sendTransacEmail(email);
