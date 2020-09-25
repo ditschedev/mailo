@@ -26,7 +26,7 @@ public class MailJetMailProvider extends AbstractMailProvider {
 
     @SneakyThrows
     @Override
-    public boolean send(Mail mail) throws IOException {
+    public boolean send(Mail mail) {
         MailjetRequest request = new MailjetRequest(Emailv31.resource)
                 .property(Emailv31.MESSAGES, new JSONArray()
                         .put(new JSONObject()

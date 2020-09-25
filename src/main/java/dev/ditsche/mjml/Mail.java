@@ -106,7 +106,7 @@ public class Mail {
         if(!template.endsWith(".mjml")) template += ".mjml";
         if(properties == null) properties = new HashMap<>();
         MustacheFactory mf = new DefaultMustacheFactory();
-        if(!Files.exists(Path.of("templates", template)))
+        if(Mail.class.getResource("/templates/" + template) == null)
             throw new TemplateNotFoundException();
         Mustache mustache = mf.compile("templates/" + template);
         StringWriter stringWriter = new StringWriter();
