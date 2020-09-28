@@ -2,7 +2,7 @@
 
 This is a client for sending mjml emails from java applications :heart:.
 
-It is extendable, as you can add custom mail providers and comes with a SMTP and Mailjet provider out of the box.
+It is extendable, as you can add custom mail providers and comes with a SMTP and some mail service providers out of the box.
 
 ## Installation
 Add the dependency to your maven dependencies:
@@ -11,7 +11,7 @@ Add the dependency to your maven dependencies:
 <dependency>
     <groupId>dev.ditsche</groupId>
     <artifactId>mjml-client</artifactId>
-    <version>1.2.3</version>
+    <version>2.0.0</version>
 </dependency>
 ```
 
