@@ -24,9 +24,7 @@ public class Mail {
     @Setter
     private String subject;
 
-    @Getter
-    @Setter
-    private MailAddress recipient;
+    private Set<MailAddress> recipients;
 
     private Set<MailAddress> cc;
 
@@ -46,7 +44,8 @@ public class Mail {
 
     public Mail(String subject, MailAddress to) {
         this.subject = subject;
-        this.recipient = to;
+        this.recipients = new HashSet<>();
+        this.recipients.add(to);
         this.cc = new HashSet<>();
         this.bcc = new HashSet<>();
         this.mjml = "";
@@ -70,10 +69,20 @@ public class Mail {
         this.bcc.addAll(Arrays.asList(mailAddress));
     }
 
+    /**
+     * Gets an immutable collection of the current cc's.
+     *
+     * @return A immutable set of the current cc list.
+     */
     public Set<MailAddress> getCC() {
         return Collections.unmodifiableSet(cc);
     }
 
+    /**
+     * Gets an immutable collection of the current bcc's.
+     *
+     * @return A immutable set of the current bcc list.
+     */
     public Set<MailAddress> getBCC() {
         return Collections.unmodifiableSet(bcc);
     }
