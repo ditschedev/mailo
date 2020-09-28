@@ -4,6 +4,7 @@ import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Properties;
 
@@ -42,22 +43,30 @@ public class SMTPMailProvider extends AbstractMailProvider {
     }
 
     @Override
-    public boolean send(Mail mail) throws IOException {
+    public boolean send(Mail mail) {
         try {
             MimeMessage message = new MimeMessage(session);
             message.addHeader("Content-type", "text/HTML; charset=UTF-8");
             message.addHeader("format", "flowed");
             message.addHeader("Content-Transfer-Encoding", "8bit");
 
-            message.setFrom(new InternetAddress(this.config.getFrom()));
+            message.setFrom(config.getFrom().toAddress());
             if(mail.getReplyTo() != null)
                 message.setReplyTo(List.of(mail.getReplyTo().toAddress()).toArray(new Address[1]));
-            message.addRecipient(Message.RecipientType.TO, mail.getRecipient().toAddress());
+            for(MailAddress address : mail.getRecipients()) {
+                message.addRecipient(Message.RecipientType.TO, address.toAddress());
+            }
+            for(MailAddress address : mail.getCC()) {
+                message.addRecipient(Message.RecipientType.CC, address.toAddress());
+            }
+            for(MailAddress address : mail.getBCC()) {
+                message.addRecipient(Message.RecipientType.BCC, address.toAddress());
+            }
             message.setSubject(mail.getSubject(), "UTF-8");
             message.setContent(mjmlToHtml(mail.getMjml()), "text/html");
             Transport.send(message);
             return true;
-        } catch (MessagingException e) {
+        } catch (MessagingException | UnsupportedEncodingException e) {
             e.printStackTrace();
             return false;
         }

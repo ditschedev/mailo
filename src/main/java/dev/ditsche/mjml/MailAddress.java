@@ -32,4 +32,10 @@ public class MailAddress {
         return new InternetAddress(this.email, this.name);
     }
 
+    public String toString() {
+        if(this.name != null)
+            return this.name + "<" + this.email + ">";
+        return this.email;
+    }
+
 }

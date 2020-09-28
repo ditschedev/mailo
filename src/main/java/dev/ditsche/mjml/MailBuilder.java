@@ -34,7 +34,7 @@ public final class MailBuilder {
 
     public Mail template(String path) {
         Mail mail = Mail.fromTemplate(this.subject, path, this.params);
-        mail.setRecipient(this.recipient);
+        mail.addRecipient(this.recipient);
         return mail;
     }
 

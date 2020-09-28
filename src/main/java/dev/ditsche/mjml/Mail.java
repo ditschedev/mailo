@@ -24,9 +24,7 @@ public class Mail {
     @Setter
     private String subject;
 
-    @Getter
-    @Setter
-    private MailAddress recipient;
+    private Set<MailAddress> recipients;
 
     private Set<MailAddress> cc;
 
@@ -46,10 +44,23 @@ public class Mail {
 
     public Mail(String subject, MailAddress to) {
         this.subject = subject;
-        this.recipient = to;
+        this.recipients = new HashSet<>();
+        if(to != null)
+            this.recipients.add(to);
         this.cc = new HashSet<>();
         this.bcc = new HashSet<>();
         this.mjml = "";
+    }
+
+    /**
+     * Adds one or more address to the mails recipients.
+     *
+     * @param mailAddress Email addresses that should be added.
+     */
+    public void addRecipient(MailAddress ...mailAddress) {
+        if(mailAddress == null)
+            throw new IllegalArgumentException("At least one MailAddress must be provided");
+        this.recipients.addAll(Arrays.asList(mailAddress));
     }
 
     /**
@@ -58,6 +69,8 @@ public class Mail {
      * @param mailAddress Email addresses that should be added.
      */
     public void addCC(MailAddress ...mailAddress) {
+        if(mailAddress == null)
+            throw new IllegalArgumentException("At least one MailAddress must be provided");
         this.cc.addAll(Arrays.asList(mailAddress));
     }
 
@@ -67,15 +80,36 @@ public class Mail {
      * @param mailAddress Email addresses that should be added.
      */
     public void addBCC(MailAddress ...mailAddress) {
+        if(mailAddress == null)
+            throw new IllegalArgumentException("At least one MailAddress must be provided");
         this.bcc.addAll(Arrays.asList(mailAddress));
     }
 
-    public Set<MailAddress> getCC() {
-        return Collections.unmodifiableSet(cc);
+    /**
+     * Gets an immutable collection of the current recipients.
+     *
+     * @return A immutable set of the current recipient list.
+     */
+    public Set<MailAddress> getRecipients() {
+        return Collections.unmodifiableSet(this.recipients);
     }
 
+    /**
+     * Gets an immutable collection of the current cc's.
+     *
+     * @return A immutable set of the current cc list.
+     */
+    public Set<MailAddress> getCC() {
+        return Collections.unmodifiableSet(this.cc);
+    }
+
+    /**
+     * Gets an immutable collection of the current bcc's.
+     *
+     * @return A immutable set of the current bcc list.
+     */
     public Set<MailAddress> getBCC() {
-        return Collections.unmodifiableSet(bcc);
+        return Collections.unmodifiableSet(this.bcc);
     }
 
     /**
@@ -106,7 +140,7 @@ public class Mail {
         if(!template.endsWith(".mjml")) template += ".mjml";
         if(properties == null) properties = new HashMap<>();
         MustacheFactory mf = new DefaultMustacheFactory();
-        if(!Files.exists(Path.of("templates", template)))
+        if(Mail.class.getResource("/templates/" + template) == null)
             throw new TemplateNotFoundException();
         Mustache mustache = mf.compile("templates/" + template);
         StringWriter stringWriter = new StringWriter();
