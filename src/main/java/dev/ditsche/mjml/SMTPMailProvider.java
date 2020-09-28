@@ -50,7 +50,7 @@ public class SMTPMailProvider extends AbstractMailProvider {
             message.addHeader("format", "flowed");
             message.addHeader("Content-Transfer-Encoding", "8bit");
 
-            message.setFrom(new InternetAddress(this.config.getFrom()));
+            message.setFrom(config.getFrom().toAddress());
             if(mail.getReplyTo() != null)
                 message.setReplyTo(List.of(mail.getReplyTo().toAddress()).toArray(new Address[1]));
             message.addRecipient(Message.RecipientType.TO, mail.getRecipient().toAddress());

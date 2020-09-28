@@ -14,9 +14,9 @@ public class MJMLConfig {
 
     private String appSecret;
 
-    private String from;
+    private MailAddress from;
 
-    public MJMLConfig(String appId, String appSecret, String from) {
+    public MJMLConfig(String appId, String appSecret, MailAddress from) {
         this.appId = appId;
         this.appSecret = appSecret;
         this.from = from;

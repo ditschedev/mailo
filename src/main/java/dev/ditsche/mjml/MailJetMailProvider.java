@@ -31,14 +31,14 @@ public class MailJetMailProvider extends AbstractMailProvider {
                 .property(Emailv31.MESSAGES, new JSONArray()
                         .put(new JSONObject()
                                 .put(Emailv31.Message.FROM, new JSONObject()
-                                        .put("Email", this.config.getFrom()))
+                                        .put("Email", this.config.getFrom().getEmail())
+                                        .put("Name", this.config.getFrom().getName()))
                                 .put(Emailv31.Message.TO, new JSONArray()
                                         .put(new JSONObject()
                                                 .put("Email", mail.getRecipient().getEmail())
                                                 .put("Name", mail.getRecipient().getName())))
                                 .put(Emailv31.Message.SUBJECT, mail.getSubject())
-                                .put(Emailv31.Message.HTMLPART, mjmlToHtml(mail.getMjml()))
-                                .put(Emailv31.Message.CUSTOMID, "se-lv")));
+                                .put(Emailv31.Message.HTMLPART, mjmlToHtml(mail.getMjml()))));
         MailjetResponse response = mailjetClient.post(request);
         return response.getStatus() == 200;
     }

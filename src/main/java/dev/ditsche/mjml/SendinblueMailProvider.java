@@ -32,7 +32,7 @@ public class SendinblueMailProvider extends AbstractMailProvider {
         SendSmtpEmail email = new SendSmtpEmail();
         email.addToItem(new SendSmtpEmailTo().email(mail.getRecipient().getEmail()).name(mail.getRecipient().getName()));
         email.subject(mail.getSubject());
-        email.setSender(new SendSmtpEmailSender().email(config.getFrom()));
+        email.setSender(new SendSmtpEmailSender().email(config.getFrom().getEmail()).name(config.getFrom().getName()));
         email.setHtmlContent(mjmlToHtml(mail.getMjml()));
         if(mail.getCC() != null)
             email.setCc(mail.getCC().stream().map(ma -> new SendSmtpEmailCc().email(ma.getEmail()).name(ma.getName())).collect(Collectors.toList()));
