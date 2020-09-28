@@ -52,6 +52,15 @@ public class Mail {
     }
 
     /**
+     * Adds one or more address to the mails recipients.
+     *
+     * @param mailAddress Email addresses that should be added.
+     */
+    public void addRecipient(MailAddress ...mailAddress) {
+        this.recipients.addAll(Arrays.asList(mailAddress));
+    }
+
+    /**
      * Adds one or more address to the mails bcc addresses.
      *
      * @param mailAddress Email addresses that should be added.
@@ -70,12 +79,21 @@ public class Mail {
     }
 
     /**
+     * Gets an immutable collection of the current recipients.
+     *
+     * @return A immutable set of the current recipient list.
+     */
+    public Set<MailAddress> getRecipients() {
+        return Collections.unmodifiableSet(this.recipients);
+    }
+
+    /**
      * Gets an immutable collection of the current cc's.
      *
      * @return A immutable set of the current cc list.
      */
     public Set<MailAddress> getCC() {
-        return Collections.unmodifiableSet(cc);
+        return Collections.unmodifiableSet(this.cc);
     }
 
     /**
@@ -84,7 +102,7 @@ public class Mail {
      * @return A immutable set of the current bcc list.
      */
     public Set<MailAddress> getBCC() {
-        return Collections.unmodifiableSet(bcc);
+        return Collections.unmodifiableSet(this.bcc);
     }
 
     /**
