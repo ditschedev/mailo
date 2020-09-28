@@ -1,6 +1,5 @@
 package dev.ditsche.mjml;
 
-import kong.unirest.Unirest;
 import sendinblue.ApiClient;
 import sendinblue.ApiException;
 import sendinblue.Configuration;
@@ -8,7 +7,6 @@ import sendinblue.auth.ApiKeyAuth;
 import sibApi.SmtpApi;
 import sibModel.*;
 
-import java.io.IOException;
 import java.util.stream.Collectors;
 
 /**

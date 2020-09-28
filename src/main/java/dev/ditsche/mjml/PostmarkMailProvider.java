@@ -3,11 +3,9 @@ package dev.ditsche.mjml;
 import com.wildbit.java.postmark.Postmark;
 import com.wildbit.java.postmark.client.ApiClient;
 import com.wildbit.java.postmark.client.data.model.message.Message;
-import com.wildbit.java.postmark.client.data.model.message.MessageResponse;
 import com.wildbit.java.postmark.client.exception.PostmarkException;
 
 import java.io.IOException;
-import java.util.stream.Collectors;
 
 /**
  * @author Tobias Dittmann

@@ -1,7 +1,5 @@
 package dev.ditsche.mjml;
 
-import kong.unirest.Unirest;
-import kong.unirest.jackson.JacksonObjectMapper;
 import lombok.Getter;
 
 /**

@@ -46,7 +46,6 @@ public class SendGridMailProvider extends AbstractMailProvider {
 
         send.addPersonalization(personalization);
 
-
         Request request = new Request();
         try {
             request.setMethod(Method.POST);
