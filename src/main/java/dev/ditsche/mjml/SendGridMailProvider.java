@@ -6,6 +6,7 @@ import com.sendgrid.Response;
 import com.sendgrid.SendGrid;
 import com.sendgrid.helpers.mail.objects.Content;
 import com.sendgrid.helpers.mail.objects.Email;
+import com.sendgrid.helpers.mail.objects.Personalization;
 
 import java.io.IOException;
 
@@ -24,12 +25,28 @@ public class SendGridMailProvider extends AbstractMailProvider {
 
     @Override
     public boolean send(Mail mail) {
-        com.sendgrid.helpers.mail.Mail send = new com.sendgrid.helpers.mail.Mail(
-                mailAddressToEmail(this.config.getFrom()),
-                mail.getSubject(),
-                mailAddressToEmail(mail.getRecipient()),
-                new Content("text/html", mjmlToHtml(mail.getMjml()))
-        );
+        com.sendgrid.helpers.mail.Mail send = new com.sendgrid.helpers.mail.Mail();
+
+        send.setFrom(mailAddressToEmail(config.getFrom()));
+        send.setSubject(mail.getSubject());
+        send.addContent(new Content("text/html", mjmlToHtml(mail.getMjml())));
+        Personalization personalization = new Personalization();
+
+        for(MailAddress address : mail.getRecipients()) {
+            personalization.addTo(mailAddressToEmail(address));
+        }
+
+        for(MailAddress address : mail.getCC()) {
+            personalization.addCc(mailAddressToEmail(address));
+        }
+
+        for(MailAddress address : mail.getBCC()) {
+            personalization.addBcc(mailAddressToEmail(address));
+        }
+
+        send.addPersonalization(personalization);
+
+
         Request request = new Request();
         try {
             request.setMethod(Method.POST);

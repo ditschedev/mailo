@@ -26,12 +26,12 @@ public class PostmarkMailProvider extends AbstractMailProvider {
         Message message = new Message();
 
         message.setFrom(config.getFrom().toString());
-        message.setTo(mail.getRecipient().toString());
+        message.setTo(addressSetToString(mail.getRecipients()));
         message.setSubject(mail.getSubject());
         if(message.getCc() != null)
-            message.setCc(mail.getCC().stream().map(MailAddress::toString).collect(Collectors.toList()));
+            message.setCc(addressSetToString(mail.getCC()));
         if(message.getBcc() != null)
-        message.setBcc(mail.getBCC().stream().map(MailAddress::toString).collect(Collectors.toList()));
+        message.setBcc(addressSetToString(mail.getBCC()));
         if(message.getReplyTo() != null)
             message.setReplyTo(mail.getReplyTo().toString());
         message.setHtmlBody(mjmlToHtml(mail.getMjml()));

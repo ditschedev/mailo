@@ -30,7 +30,7 @@ public class SendinblueMailProvider extends AbstractMailProvider {
     @Override
     public boolean send(Mail mail) {
         SendSmtpEmail email = new SendSmtpEmail();
-        email.addToItem(new SendSmtpEmailTo().email(mail.getRecipient().getEmail()).name(mail.getRecipient().getName()));
+        email.setTo(mail.getRecipients().stream().map(ma -> new SendSmtpEmailTo().email(ma.getEmail()).name(ma.getName())).collect(Collectors.toList()));
         email.subject(mail.getSubject());
         email.setSender(new SendSmtpEmailSender().email(config.getFrom().getEmail()).name(config.getFrom().getName()));
         email.setHtmlContent(mjmlToHtml(mail.getMjml()));
