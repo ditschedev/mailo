@@ -2,7 +2,7 @@
 
 This is a client for sending mjml emails from java applications :heart:.
 
-It is extendable, as you can add custom mail providers and comes with a SMTP and Mailjet provider out of the box.
+It is extendable, as you can add custom mail providers and comes with a SMTP and some mail service providers out of the box.
 
 ## Installation
 Add the dependency to your maven dependencies:
