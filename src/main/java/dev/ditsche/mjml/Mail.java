@@ -45,7 +45,8 @@ public class Mail {
     public Mail(String subject, MailAddress to) {
         this.subject = subject;
         this.recipients = new HashSet<>();
-        this.recipients.add(to);
+        if(to != null)
+            this.recipients.add(to);
         this.cc = new HashSet<>();
         this.bcc = new HashSet<>();
         this.mjml = "";
@@ -57,6 +58,8 @@ public class Mail {
      * @param mailAddress Email addresses that should be added.
      */
     public void addRecipient(MailAddress ...mailAddress) {
+        if(mailAddress == null)
+            throw new IllegalArgumentException("At least one MailAddress must be provided");
         this.recipients.addAll(Arrays.asList(mailAddress));
     }
 
@@ -66,6 +69,8 @@ public class Mail {
      * @param mailAddress Email addresses that should be added.
      */
     public void addCC(MailAddress ...mailAddress) {
+        if(mailAddress == null)
+            throw new IllegalArgumentException("At least one MailAddress must be provided");
         this.cc.addAll(Arrays.asList(mailAddress));
     }
 
@@ -75,6 +80,8 @@ public class Mail {
      * @param mailAddress Email addresses that should be added.
      */
     public void addBCC(MailAddress ...mailAddress) {
+        if(mailAddress == null)
+            throw new IllegalArgumentException("At least one MailAddress must be provided");
         this.bcc.addAll(Arrays.asList(mailAddress));
     }
 
