@@ -1,5 +1,7 @@
-package dev.ditsche.mjml;
+package dev.ditsche.mjml.provider;
 
+import dev.ditsche.mjml.config.MJMLConfig;
+import dev.ditsche.mjml.Mail;
 import sendinblue.ApiClient;
 import sendinblue.ApiException;
 import sendinblue.Configuration;

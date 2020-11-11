@@ -1,5 +1,8 @@
-package dev.ditsche.mjml;
+package dev.ditsche.mjml.provider;
 
+import dev.ditsche.mjml.config.MJMLConfig;
+import dev.ditsche.mjml.MailAddress;
+import dev.ditsche.mjml.MjmlRequest;
 import kong.unirest.Unirest;
 import kong.unirest.jackson.JacksonObjectMapper;
 

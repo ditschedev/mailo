@@ -1,4 +1,6 @@
-package dev.ditsche.mjml;
+package dev.ditsche.mjml.provider;
+
+import dev.ditsche.mjml.Mail;
 
 public interface MailProvider {
 

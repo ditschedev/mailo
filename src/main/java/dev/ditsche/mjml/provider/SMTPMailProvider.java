@@ -1,4 +1,9 @@
-package dev.ditsche.mjml;
+package dev.ditsche.mjml.provider;
+
+import dev.ditsche.mjml.config.MJMLConfig;
+import dev.ditsche.mjml.Mail;
+import dev.ditsche.mjml.MailAddress;
+import dev.ditsche.mjml.config.SMTPConfig;
 
 import javax.mail.*;
 import javax.mail.internet.MimeMessage;

@@ -1,9 +1,11 @@
-package dev.ditsche.mjml;
+package dev.ditsche.mjml.provider;
 
 import com.wildbit.java.postmark.Postmark;
 import com.wildbit.java.postmark.client.ApiClient;
 import com.wildbit.java.postmark.client.data.model.message.Message;
 import com.wildbit.java.postmark.client.exception.PostmarkException;
+import dev.ditsche.mjml.config.MJMLConfig;
+import dev.ditsche.mjml.Mail;
 
 import java.io.IOException;
 

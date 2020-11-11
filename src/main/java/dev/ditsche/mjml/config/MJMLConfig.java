@@ -1,5 +1,6 @@
-package dev.ditsche.mjml;
+package dev.ditsche.mjml.config;
 
+import dev.ditsche.mjml.MailAddress;
 import lombok.Getter;
 
 /**
