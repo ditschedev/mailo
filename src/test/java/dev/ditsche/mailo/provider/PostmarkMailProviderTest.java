@@ -24,6 +24,8 @@ public class PostmarkMailProviderTest {
 
     @Test
     public void shouldSendMailWithWorkingCredentials() {
+        if(serverToken == null)
+            return;
         MailProvider mailProvider = new PostmarkMailProvider(serverToken);
         assertThat(mailProvider.send(mail)).isTrue();
     }

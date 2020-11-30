@@ -24,6 +24,8 @@ public class SendGridMailProviderTest {
 
     @Test
     public void shouldSendMailWithWorkingCredentials() {
+        if(apiKey == null)
+            return;
         MailProvider mailProvider = new SendGridMailProvider(apiKey);
         assertThat(mailProvider.send(mail)).isTrue();
     }

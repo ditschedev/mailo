@@ -24,6 +24,8 @@ public class SendinblueMailProviderTest {
 
     @Test
     public void shouldSendMailWithWorkingCredentials() {
+        if(apiKey == null)
+            return;
         MailProvider mailProvider = new SendinblueMailProvider(apiKey);
         assertThat(mailProvider.send(mail)).isTrue();
     }

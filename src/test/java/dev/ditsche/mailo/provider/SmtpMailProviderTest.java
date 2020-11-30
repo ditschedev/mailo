@@ -5,6 +5,8 @@ import dev.ditsche.mailo.MailAddress;
 import dev.ditsche.mailo.config.SmtpConfig;
 import dev.ditsche.mailo.factory.TemplateMailBuilder;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
+import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariables;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -39,6 +41,8 @@ public class SmtpMailProviderTest {
 
     @Test
     public void shouldSendMailWithWorkingCredentials() {
+        if(System.getenv("SMTP_HOST") == null)
+            return;
         MailProvider mailProvider = new SmtpMailProvider(validConfig);
         assertThat(mailProvider.send(mail)).isTrue();
     }
