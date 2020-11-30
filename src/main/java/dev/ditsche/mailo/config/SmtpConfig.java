@@ -1,4 +1,4 @@
-package dev.ditsche.mjml4j.config;
+package dev.ditsche.mailo.config;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class SMTPConfig {
+public class SmtpConfig {
 
     private String host;
 

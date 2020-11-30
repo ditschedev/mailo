@@ -1,4 +1,4 @@
-package dev.ditsche.mjml4j;
+package dev.ditsche.mailo.mjml;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
