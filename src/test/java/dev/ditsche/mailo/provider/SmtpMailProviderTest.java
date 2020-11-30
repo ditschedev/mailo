@@ -16,7 +16,7 @@ public class SmtpMailProviderTest {
             .cc(new MailAddress("cc@ditsche.dev"))
             .cc(new MailAddress("anothercc@ditsche.dev"))
             .bcc(new MailAddress("bcc@ditsche.dev"))
-            .from(new MailAddress("from@ditsche.dev"))
+            .from(new MailAddress("hello@ditsche.dev"))
             .replyTo(new MailAddress("replyto@ditsche.dev"))
             .body("Testbody!")
             .build();
