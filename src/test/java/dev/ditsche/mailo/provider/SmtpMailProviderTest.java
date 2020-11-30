@@ -5,6 +5,7 @@ import dev.ditsche.mailo.MailAddress;
 import dev.ditsche.mailo.config.SmtpConfig;
 import dev.ditsche.mailo.factory.TemplateMailBuilder;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
 import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
 import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariables;
 
@@ -40,6 +41,7 @@ public class SmtpMailProviderTest {
     );
 
     @Test
+    @DisabledIfEnvironmentVariable(named = "CI", matches = "true")
     public void shouldSendMailWithWorkingCredentials() {
         if(System.getenv("SMTP_HOST") == null)
             return;
