@@ -32,10 +32,10 @@ public class SmtpMailProviderTest {
     );
 
     private final SmtpConfig invalidConfig = new SmtpConfig(
-            System.getenv("SMTP_HOST"),
-            12345,
-            System.getenv("SMTP_USER"),
-            System.getenv("SMTP_PW"),
+            "",
+            0,
+            "",
+            "",
             false
     );
 
