@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SMTPMailProviderTest {
+public class SmtpMailProviderTest {
 
     private final Mail mail = TemplateMailBuilder.create()
             .subject("Testsubject")
@@ -39,13 +39,13 @@ public class SMTPMailProviderTest {
 
     @Test
     public void shouldSendMailWithWorkingCredentials() {
-        MailProvider mailProvider = new SMTPMailProvider(validConfig);
+        MailProvider mailProvider = new SmtpMailProvider(validConfig);
         assertThat(mailProvider.send(mail)).isTrue();
     }
 
     @Test
     public void shouldNotSendMailWithInvalidCredentials() {
-        MailProvider mailProvider = new SMTPMailProvider(invalidConfig);
+        MailProvider mailProvider = new SmtpMailProvider(invalidConfig);
         assertThat(mailProvider.send(mail)).isFalse();
     }
 

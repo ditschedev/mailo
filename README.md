@@ -28,6 +28,7 @@ Sets the MJML application secret obtained by requesting api keys from [mjml.io](
 
 ##### `MAILO_TEMPLATE_DIR`
 Sets the root template directory in the classpath where all mail templates are located. 
+Defaults to `/templates/`.
 
 ### Config Object
 The libary is designed to be configured through environment variables, but you can use the config object too. Before sending or
@@ -51,14 +52,14 @@ To send a mail, adapt the following code snippet.
 
 ```java
 // Create a config
-SMTPConfig config = new SMTPConfig();
+SmtpConfig config = new SmtpConfig();
 config.setHost("smtp.example.com");
 config.setPort(465);
 config.setUsername("test@example.com");
 config.setPassword("test123!");
 
 // Init mail provider
-MailProvider mailProvider = new SMTPMailProvider(config);
+MailProvider mailProvider = new SmtpMailProvider(config);
 
 // Build a mail
 Mail mail = MailBuilder.create()
