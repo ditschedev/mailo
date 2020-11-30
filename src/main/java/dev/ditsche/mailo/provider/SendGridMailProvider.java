@@ -1,4 +1,4 @@
-package dev.ditsche.mjml;
+package dev.ditsche.mailo.provider;
 
 import com.sendgrid.Method;
 import com.sendgrid.Request;
@@ -7,6 +7,8 @@ import com.sendgrid.SendGrid;
 import com.sendgrid.helpers.mail.objects.Content;
 import com.sendgrid.helpers.mail.objects.Email;
 import com.sendgrid.helpers.mail.objects.Personalization;
+import dev.ditsche.mailo.Mail;
+import dev.ditsche.mailo.MailAddress;
 
 import java.io.IOException;
 
@@ -17,9 +19,7 @@ public class SendGridMailProvider extends AbstractMailProvider {
 
     private final SendGrid client;
 
-    public SendGridMailProvider(MJMLConfig config, String apiKey) {
-        super(config);
-
+    public SendGridMailProvider(String apiKey) {
         client = new SendGrid(apiKey);
     }
 
@@ -27,9 +27,9 @@ public class SendGridMailProvider extends AbstractMailProvider {
     public boolean send(Mail mail) {
         com.sendgrid.helpers.mail.Mail send = new com.sendgrid.helpers.mail.Mail();
 
-        send.setFrom(mailAddressToEmail(config.getFrom()));
+        send.setFrom(mailAddressToEmail(mail.getFrom()));
         send.setSubject(mail.getSubject());
-        send.addContent(new Content("text/html", mjmlToHtml(mail.getMjml())));
+        send.addContent(new Content("text/html", mail.getBody()));
         Personalization personalization = new Personalization();
 
         for(MailAddress address : mail.getRecipients()) {

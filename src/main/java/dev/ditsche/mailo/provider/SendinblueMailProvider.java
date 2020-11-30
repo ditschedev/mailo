@@ -1,5 +1,6 @@
-package dev.ditsche.mjml;
+package dev.ditsche.mailo.provider;
 
+import dev.ditsche.mailo.Mail;
 import sendinblue.ApiClient;
 import sendinblue.ApiException;
 import sendinblue.Configuration;
@@ -16,12 +17,10 @@ public class SendinblueMailProvider extends AbstractMailProvider {
 
     private final SmtpApi sendApi;
 
-    public SendinblueMailProvider(MJMLConfig config, String apiKey) {
-        super(config);
+    public SendinblueMailProvider(String apiKey) {
         ApiClient apiClient = Configuration.getDefaultApiClient();
         ApiKeyAuth key = (ApiKeyAuth) apiClient.getAuthentication("api-key");
         key.setApiKey(apiKey);
-
         sendApi = new SmtpApi();
     }
 
@@ -30,8 +29,8 @@ public class SendinblueMailProvider extends AbstractMailProvider {
         SendSmtpEmail email = new SendSmtpEmail();
         email.setTo(mail.getRecipients().stream().map(ma -> new SendSmtpEmailTo().email(ma.getEmail()).name(ma.getName())).collect(Collectors.toList()));
         email.subject(mail.getSubject());
-        email.setSender(new SendSmtpEmailSender().email(config.getFrom().getEmail()).name(config.getFrom().getName()));
-        email.setHtmlContent(mjmlToHtml(mail.getMjml()));
+        email.setSender(new SendSmtpEmailSender().email(mail.getFrom().getEmail()).name(mail.getFrom().getName()));
+        email.setHtmlContent(mail.getBody());
         if(mail.getCC() != null)
             email.setCc(mail.getCC().stream().map(ma -> new SendSmtpEmailCc().email(ma.getEmail()).name(ma.getName())).collect(Collectors.toList()));
         if(mail.getBCC() != null)
