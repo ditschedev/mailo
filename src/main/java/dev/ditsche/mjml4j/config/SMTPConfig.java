@@ -1,4 +1,4 @@
-package dev.ditsche.mjml.config;
+package dev.ditsche.mjml4j.config;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,7 +1,7 @@
-package dev.ditsche.mjml.provider;
+package dev.ditsche.mjml4j.provider;
 
-import dev.ditsche.mjml.config.MJMLConfig;
-import dev.ditsche.mjml.Mail;
+import dev.ditsche.mjml4j.config.MJMLConfig;
+import dev.ditsche.mjml4j.Mail;
 import kong.unirest.HttpResponse;
 import kong.unirest.JsonNode;
 import kong.unirest.Unirest;

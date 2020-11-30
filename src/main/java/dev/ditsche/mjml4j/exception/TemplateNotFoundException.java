@@ -1,4 +1,4 @@
-package dev.ditsche.mjml.exception;
+package dev.ditsche.mjml4j.exception;
 
 /**
  * @author Tobias Dittmann

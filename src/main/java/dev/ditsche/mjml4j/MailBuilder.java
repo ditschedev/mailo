@@ -1,4 +1,4 @@
-package dev.ditsche.mjml;
+package dev.ditsche.mjml4j;
 
 import java.util.HashMap;
 

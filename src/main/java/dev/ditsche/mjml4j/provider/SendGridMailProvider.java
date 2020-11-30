@@ -1,4 +1,4 @@
-package dev.ditsche.mjml.provider;
+package dev.ditsche.mjml4j.provider;
 
 import com.sendgrid.Method;
 import com.sendgrid.Request;
@@ -7,9 +7,9 @@ import com.sendgrid.SendGrid;
 import com.sendgrid.helpers.mail.objects.Content;
 import com.sendgrid.helpers.mail.objects.Email;
 import com.sendgrid.helpers.mail.objects.Personalization;
-import dev.ditsche.mjml.config.MJMLConfig;
-import dev.ditsche.mjml.Mail;
-import dev.ditsche.mjml.MailAddress;
+import dev.ditsche.mjml4j.config.MJMLConfig;
+import dev.ditsche.mjml4j.Mail;
+import dev.ditsche.mjml4j.MailAddress;
 
 import java.io.IOException;
 

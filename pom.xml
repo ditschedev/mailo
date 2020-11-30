@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>dev.ditsche</groupId>
-    <artifactId>mjml-client</artifactId>
+    <artifactId>mjml4j</artifactId>
     <version>2.0.1-SNAPSHOT</version>
 
     <packaging>jar</packaging>
@@ -13,7 +13,7 @@
         This is a client for sending mjml emails from a Spring Boot REST API.
         It makes use of Mustache for templating and is adaptable.
     </description>
-    <url>https://github.com/ditschedev/mjml-client</url>
+    <url>https://github.com/ditschedev/mjml4j</url>
 
     <licenses>
         <license>
