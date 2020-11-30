@@ -18,7 +18,6 @@ jobs:
       SENDINBLUE_API_KEY: ${{ secrets.SENDINBLUE_API_KEY }}
       SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
       POSTMARK_SERVER_TOKEN: ${{ secrets.POSTMARK_SERVER_TOKEN }}
-
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 11

@@ -13,11 +13,11 @@ public class SmtpMailProviderTest {
     private final Mail mail = TemplateMailBuilder.create()
             .subject("Testsubject")
             .to(new MailAddress("hello@ditsche.dev"))
-            .cc(new MailAddress("cc@ditsche.dev"))
-            .cc(new MailAddress("anothercc@ditsche.dev"))
-            .bcc(new MailAddress("bcc@ditsche.dev"))
+            .cc(new MailAddress("hello@ditsche.dev"))
+            .cc(new MailAddress("hello@ditsche.dev"))
+            .bcc(new MailAddress("hello@ditsche.dev"))
             .from(new MailAddress("hello@ditsche.dev"))
-            .replyTo(new MailAddress("replyto@ditsche.dev"))
+            .replyTo(new MailAddress("hello@ditsche.dev"))
             .body("Testbody!")
             .build();
 
