@@ -12,11 +12,11 @@ import java.util.Properties;
 /**
  * @author Tobias Dittmann
  */
-public class SMTPMailProvider extends AbstractMailProvider {
+public class SmtpMailProvider extends AbstractMailProvider {
 
     private final Session session;
 
-    public SMTPMailProvider(SmtpConfig smtpConfig) {
+    public SmtpMailProvider(SmtpConfig smtpConfig) {
         Properties props = new Properties();
         props.put("mail.smtp.host", smtpConfig.getHost());
         props.put("mail.smtp.port", smtpConfig.getPort());

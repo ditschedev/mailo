@@ -4,6 +4,7 @@ import dev.ditsche.mailo.Mail;
 import dev.ditsche.mailo.MailAddress;
 import dev.ditsche.mailo.factory.TemplateMailBuilder;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -23,7 +24,10 @@ public class SendGridMailProviderTest {
             .build();
 
     @Test
+    @DisabledIfEnvironmentVariable(named = "CI", matches = "true")
     public void shouldSendMailWithWorkingCredentials() {
+        if(apiKey == null)
+            return;
         MailProvider mailProvider = new SendGridMailProvider(apiKey);
         assertThat(mailProvider.send(mail)).isTrue();
     }

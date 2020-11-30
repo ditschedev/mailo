@@ -5,19 +5,22 @@ import dev.ditsche.mailo.MailAddress;
 import dev.ditsche.mailo.config.SmtpConfig;
 import dev.ditsche.mailo.factory.TemplateMailBuilder;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
+import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
+import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariables;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SMTPMailProviderTest {
+public class SmtpMailProviderTest {
 
     private final Mail mail = TemplateMailBuilder.create()
             .subject("Testsubject")
             .to(new MailAddress("hello@ditsche.dev"))
-            .cc(new MailAddress("cc@ditsche.dev"))
-            .cc(new MailAddress("anothercc@ditsche.dev"))
-            .bcc(new MailAddress("bcc@ditsche.dev"))
-            .from(new MailAddress("from@ditsche.dev"))
-            .replyTo(new MailAddress("replyto@ditsche.dev"))
+            .cc(new MailAddress("hello@ditsche.dev"))
+            .cc(new MailAddress("hello@ditsche.dev"))
+            .bcc(new MailAddress("hello@ditsche.dev"))
+            .from(new MailAddress("hello@ditsche.dev"))
+            .replyTo(new MailAddress("hello@ditsche.dev"))
             .body("Testbody!")
             .build();
 
@@ -30,22 +33,25 @@ public class SMTPMailProviderTest {
     );
 
     private final SmtpConfig invalidConfig = new SmtpConfig(
-            System.getenv("SMTP_HOST"),
-            12345,
-            System.getenv("SMTP_USER"),
-            System.getenv("SMTP_PW"),
+            "",
+            0,
+            "",
+            "",
             false
     );
 
     @Test
+    @DisabledIfEnvironmentVariable(named = "CI", matches = "true")
     public void shouldSendMailWithWorkingCredentials() {
-        MailProvider mailProvider = new SMTPMailProvider(validConfig);
+        if(System.getenv("SMTP_HOST") == null)
+            return;
+        MailProvider mailProvider = new SmtpMailProvider(validConfig);
         assertThat(mailProvider.send(mail)).isTrue();
     }
 
     @Test
     public void shouldNotSendMailWithInvalidCredentials() {
-        MailProvider mailProvider = new SMTPMailProvider(invalidConfig);
+        MailProvider mailProvider = new SmtpMailProvider(invalidConfig);
         assertThat(mailProvider.send(mail)).isFalse();
     }
 
