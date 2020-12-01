@@ -9,6 +9,7 @@ import com.sendgrid.helpers.mail.objects.Email;
 import com.sendgrid.helpers.mail.objects.Personalization;
 import dev.ditsche.mailo.Mail;
 import dev.ditsche.mailo.MailAddress;
+import dev.ditsche.mailo.factory.MailBuilder;
 
 import java.io.IOException;
 
@@ -21,6 +22,11 @@ public class SendGridMailProvider extends AbstractMailProvider {
 
     public SendGridMailProvider(String apiKey) {
         client = new SendGrid(apiKey);
+    }
+
+    @Override
+    public boolean send(MailBuilder mailBuilder) {
+        return send(mailBuilder.build());
     }
 
     @Override

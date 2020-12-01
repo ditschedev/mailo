@@ -3,25 +3,23 @@ package dev.ditsche.mailo.provider;
 import dev.ditsche.mailo.Mail;
 import dev.ditsche.mailo.MailAddress;
 import dev.ditsche.mailo.config.SmtpConfig;
-import dev.ditsche.mailo.factory.TemplateMailBuilder;
+import dev.ditsche.mailo.factory.MailBuilder;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
-import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
-import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariables;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SmtpMailProviderTest {
 
-    private final Mail mail = TemplateMailBuilder.create()
+    private final Mail mail = MailBuilder.mjml()
             .subject("Testsubject")
             .to(new MailAddress("hello@ditsche.dev"))
-            .cc(new MailAddress("hello@ditsche.dev"))
-            .cc(new MailAddress("hello@ditsche.dev"))
-            .bcc(new MailAddress("hello@ditsche.dev"))
+            .cc(new MailAddress("cc@ditsche.dev"))
+            .cc(new MailAddress("anothercc@ditsche.dev"))
+            .bcc(new MailAddress("bcc@ditsche.dev"))
             .from(new MailAddress("hello@ditsche.dev"))
-            .replyTo(new MailAddress("hello@ditsche.dev"))
-            .body("Testbody!")
+            .replyTo(new MailAddress("replyto@ditsche.dev"))
+            .loadTemplate("test")
             .build();
 
     private final SmtpConfig validConfig = new SmtpConfig(
