@@ -1,6 +1,7 @@
 package dev.ditsche.mailo.provider;
 
 import dev.ditsche.mailo.Mail;
+import dev.ditsche.mailo.factory.MailBuilder;
 import sendinblue.ApiClient;
 import sendinblue.ApiException;
 import sendinblue.Configuration;
@@ -22,6 +23,11 @@ public class SendinblueMailProvider extends AbstractMailProvider {
         ApiKeyAuth key = (ApiKeyAuth) apiClient.getAuthentication("api-key");
         key.setApiKey(apiKey);
         sendApi = new SmtpApi();
+    }
+
+    @Override
+    public boolean send(MailBuilder mailBuilder) {
+        return send(mailBuilder.build());
     }
 
     @Override

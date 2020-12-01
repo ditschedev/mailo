@@ -5,6 +5,7 @@ import com.wildbit.java.postmark.client.ApiClient;
 import com.wildbit.java.postmark.client.data.model.message.Message;
 import com.wildbit.java.postmark.client.exception.PostmarkException;
 import dev.ditsche.mailo.Mail;
+import dev.ditsche.mailo.factory.MailBuilder;
 
 import java.io.IOException;
 
@@ -17,6 +18,11 @@ public class PostmarkMailProvider extends AbstractMailProvider {
 
     public PostmarkMailProvider(String serverToken) {
         client = Postmark.getApiClient(serverToken);
+    }
+
+    @Override
+    public boolean send(MailBuilder mailBuilder) {
+        return send(mailBuilder.build());
     }
 
     @Override

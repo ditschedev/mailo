@@ -48,18 +48,37 @@ Write your template with mjml and place them in your template directory inside o
 searches `/templates/**` in your classpath resources.
 
 ### Sending mails
-To send a mail, adapt the following code snippet.
+To send a mail using smtp, adapt the following code snippet.
 
 ```java
-// Create a config
+// Create a smtp config for our mail provider
 SmtpConfig config = new SmtpConfig();
 config.setHost("smtp.example.com");
 config.setPort(465);
 config.setUsername("test@example.com");
 config.setPassword("test123!");
 
-// Init mail provider
+// Create a mail provider
 MailProvider mailProvider = new SmtpMailProvider(config);
+
+// Build a mail
+Mail mail = MailBuilder.mjml()
+    .subject("Email Subject")
+    .from(new MailAddress("sender@test.com", "Sender name"))
+    .to(new MailAddress("test@test.com", "Test Name"))
+    .params("url", "http://example.com")
+    .params("name", "John Doe")
+    .template("path/to/template.mjml") // .mjml extension is optional
+    .build();
+
+// Send the mail
+mailProvider.send(mail);
+```
+
+You can send mails using some big mail providers as well, if you don't like to use smtp directly. For example Postmark:
+```java
+// Create a mail provider
+MailProvider mailProvider = new PostmarkMailProvider("YOUR_POSTMARK_SERVER_TOKEN");
 
 // Build a mail
 Mail mail = MailBuilder.create()
@@ -74,3 +93,10 @@ Mail mail = MailBuilder.create()
 // Send the mail
 mailProvider.send(mail);
 ```
+
+Currently available are:
+* Postmark
+* SendGrid
+* Sendinblue
+* ~~Mailgun~~ (coming soon)
+* ~~Mailjet~~ (coming soon)

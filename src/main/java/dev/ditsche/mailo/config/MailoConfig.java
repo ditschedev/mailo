@@ -3,7 +3,6 @@ package dev.ditsche.mailo.config;
 import dev.ditsche.mailo.MailAddress;
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.http.client.HttpClient;
 
 public final class MailoConfig {
 

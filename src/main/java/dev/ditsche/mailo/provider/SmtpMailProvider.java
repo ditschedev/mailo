@@ -3,6 +3,7 @@ package dev.ditsche.mailo.provider;
 import dev.ditsche.mailo.Mail;
 import dev.ditsche.mailo.MailAddress;
 import dev.ditsche.mailo.config.SmtpConfig;
+import dev.ditsche.mailo.factory.MailBuilder;
 
 import javax.mail.*;
 import javax.mail.internet.MimeMessage;
@@ -36,6 +37,12 @@ public class SmtpMailProvider extends AbstractMailProvider {
             }
         };
         this.session = Session.getInstance(props, auth);
+    }
+
+
+    @Override
+    public boolean send(MailBuilder mailBuilder) {
+        return send(mailBuilder.build());
     }
 
     @Override
