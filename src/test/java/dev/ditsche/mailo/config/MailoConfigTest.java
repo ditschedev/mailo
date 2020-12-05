@@ -12,7 +12,7 @@ public class MailoConfigTest {
     @Test
     public void shouldInitializeWithDefaultValues() {
         MailoConfig config = MailoConfig.get();
-        assertThat(config.getTemplateDirectory()).isEqualTo("/templates/");
+        assertThat(config.getTemplateDirectory()).isEqualTo("./templates/");
         assertThat(config.getMjmlAppId()).isNotNull();
         assertThat(config.getMjmlAppSecret()).isNotNull();
         assertThat(config.getDefaultSender()).isNull();
@@ -23,7 +23,7 @@ public class MailoConfigTest {
     public void shouldStoreConfig() {
         MailoConfig config = MailoConfig.get();
         String newTemplateDir = "/test/";
-        assertThat(config.getTemplateDirectory()).isEqualTo("/templates/");
+        assertThat(config.getTemplateDirectory()).isEqualTo("./templates/");
         config.setTemplateDirectory(newTemplateDir);
         assertThat(config.getTemplateDirectory()).isEqualTo(newTemplateDir);
         config.setDefaultSender(new MailAddress("hello@ditsche.dev"));

@@ -9,6 +9,7 @@ import dev.ditsche.mailo.config.MailoConfig;
 import dev.ditsche.mailo.exception.MailBuildException;
 import dev.ditsche.mailo.exception.TemplateNotFoundException;
 import dev.ditsche.mailo.mjml.MjmlClient;
+import dev.ditsche.mailo.util.ClassLoaderUtil;
 
 import java.io.StringWriter;
 import java.util.HashMap;
@@ -102,10 +103,9 @@ final class MjmlMailBuilder implements TemplateMailBuilder {
         MailoConfig config = MailoConfig.get();
         MustacheFactory mf = new DefaultMustacheFactory();
         templatePath = config.getTemplateDirectory() + templatePath;
-        String templateFile = getClass().getResource(templatePath) == null ? null : getClass().getResource(templatePath).getFile();
-        if(templateFile == null)
+        if(ClassLoaderUtil.getResource(templatePath, MjmlMailBuilder.class) == null)
             throw new TemplateNotFoundException("Template file \"" + templatePath + "\" can not be found in classpath");
-        Mustache mustache = mf.compile(templateFile);
+        Mustache mustache = mf.compile(templatePath);
         StringWriter stringWriter = new StringWriter();
         mustache.execute(stringWriter, this.params);
         return stringWriter.toString();
