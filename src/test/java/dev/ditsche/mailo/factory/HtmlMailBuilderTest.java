@@ -183,7 +183,7 @@ public class HtmlMailBuilderTest {
 
     @Test
     public void shouldBuildMail() {
-        Mail mail = MailBuilder.mjml()
+        Mail mail = MailBuilder.html()
                 .subject("Testsubject")
                 .to(new MailAddress("hello@ditsche.dev"))
                 .cc(new MailAddress("cc@ditsche.dev"))

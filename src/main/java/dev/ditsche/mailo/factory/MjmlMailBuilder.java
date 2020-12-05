@@ -102,7 +102,7 @@ final class MjmlMailBuilder implements TemplateMailBuilder {
         MailoConfig config = MailoConfig.get();
         MustacheFactory mf = new DefaultMustacheFactory();
         templatePath = config.getTemplateDirectory() + templatePath;
-        String templateFile = MailBuilder.class.getResource(templatePath) == null ? null : MailBuilder.class.getResource(templatePath).getFile();
+        String templateFile = getClass().getResource(templatePath) == null ? null : getClass().getResource(templatePath).getFile();
         if(templateFile == null)
             throw new TemplateNotFoundException("Template file \"" + templatePath + "\" can not be found in classpath");
         Mustache mustache = mf.compile(templateFile);
