@@ -11,7 +11,7 @@ Add the dependency to your maven dependencies:
 <dependency>
     <groupId>dev.ditsche</groupId>
     <artifactId>mailo</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.3</version>
 </dependency>
 ```
 
@@ -28,7 +28,7 @@ Sets the MJML application secret obtained by requesting api keys from [mjml.io](
 
 ##### `MAILO_TEMPLATE_DIR`
 Sets the root template directory in the classpath where all mail templates are located. 
-Defaults to `/templates/`.
+Defaults to `./templates/`.
 
 ### Config Object
 The libary is designed to be configured through environment variables, but you can use the config object too. Before sending or
