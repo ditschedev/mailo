@@ -30,7 +30,7 @@ public final class MailoConfig {
     }
 
     private void init() {
-        templateDirectory = System.getenv("MAILO_TEMPLATE_DIR") != null ? System.getenv("MAILO_APP_ID") : "/templates/";
+        templateDirectory = System.getenv("MAILO_TEMPLATE_DIR") != null ? System.getenv("MAILO_TEMPLATE_DIR") : "./templates/";
         mjmlAppId = System.getenv("MAILO_APP_ID");
         mjmlAppSecret = System.getenv("MAILO_APP_SECRET");
         defaultSender = null;
