@@ -11,7 +11,7 @@ Add the dependency to your maven dependencies:
 <dependency>
     <groupId>dev.ditsche</groupId>
     <artifactId>mailo</artifactId>
-    <version>1.1.3</version>
+    <version>1.1.4</version>
 </dependency>
 ```
 
