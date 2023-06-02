@@ -100,8 +100,11 @@ final class HtmlMailBuilder implements TemplateMailBuilder {
         MailoConfig config = MailoConfig.get();
         MustacheFactory mf = new DefaultMustacheFactory();
         templatePath = config.getTemplateDirectory() + templatePath;
-        if(ClassLoaderUtil.getResource(templatePath, HtmlMailBuilder.class) == null)
+
+        if(!ClassLoaderUtil.canLoadResource(templatePath, HtmlMailBuilder.class)) {
             throw new TemplateNotFoundException("Template file \"" + templatePath + "\" can not be found in classpath");
+        }
+
         Mustache mustache = mf.compile(templatePath);
         StringWriter stringWriter = new StringWriter();
         mustache.execute(stringWriter, this.params);
