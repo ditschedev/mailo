@@ -53,9 +53,9 @@
             <version>4.1.1</version>
         </dependency>
         <dependency>
-            <groupId>com.wildbit.java</groupId>
+            <groupId>com.postmarkapp</groupId>
             <artifactId>postmark</artifactId>
-            <version>1.5.3</version>
+            <version>1.9.0</version>
         </dependency>
         <dependency>
             <groupId>com.sendgrid</groupId>
